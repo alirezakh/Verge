@@ -223,7 +223,16 @@ def store_file(id: str, vid: str) -> Tuple[Any, int]:
     storage_path = os.path.join(STORAGE_PATH, filename)
     with open(storage_path, 'wb') as f:
         f.write(file.read())
+        # In order to hide the server side file system from user's view
+        # the path to the files in db for each version is relative to the
+        # storage directory.
         db[id]['versions'][vid] = os.path.join(STORAGE_NAME, filename)
+        # The absolute path is stored separately to be able to retrieve it
+        # when receiving a download request. The key to this smaller dictionary
+        # is the filename provided by the user. An alternative and perhaps 
+        # better solution could be using the application id and version id
+        # to identify the file. But here, we give the user the option to pick  
+        # a unique name when uploading a file for an application-version pair.
         files[filename] = storage_path
     return f'{filename} has been uploaded.', 200
 
