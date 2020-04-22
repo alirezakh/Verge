@@ -11,8 +11,9 @@ Verge allows a user to:
 (For simplicity, we won't have any user accounts.)
 
 ## Backend Specification ##
-### Create Application POST /apps ###
-Creates an Application.
+### Create Application ###
+Creates an Application. 
+`POST /apps`
 ```
 Request:
     {
@@ -26,8 +27,9 @@ Response (200 OK):
     }
 ```
 
-### Get All Applications GET /apps ###
+### Get All Applications ###
 Gets all Applications.
+`GET /apps` 
 ```
 Returns:
     [
@@ -43,9 +45,10 @@ Returns:
     ]
 ```
 
-### Get One Application GET /apps/<id> ###
-Example: GET /apps/google-chrome
+### Get One Application ###
 Gets the Application with the given tag, if one exists.
+`GET /apps/<id>` 
+Example: `GET /apps/google-chrome`
 ```
 Returns:
     {
@@ -59,17 +62,20 @@ Returns:
     }
 ```
 
-### Create Version POST /apps/<id>/<version-id> ###
-Example: POST /apps/google-chrome/1.0
+### Create Version ###
 Creates a Version for the Application with the given id.
+`POST /apps/<id>/<version-id>`
+Example: `POST /apps/google-chrome/1.0`
 
-### Upload File for Version POST /apps/<id>/<version-id>/file ###
-Example: POST /apps/google-chrome/1.0
+### Upload File for Version ###
 Uploads the file (with multipart/form-data) to associate with this Version.
+`POST /apps/<id>/<version-id>/file` 
+Example: `POST /apps/google-chrome/1.0`
 
-### Get One Version GET /apps/<id>/<version-id> ###
-Example: GET /apps/google-chrome/1.0
+### Get One Version ###
 Gets the Version for this Application with the given version-id, including the link to the file if it has been uploaded.
+`GET /apps/<id>/<version-id>` 
+Example: `GET /apps/google-chrome/1.0`
 ```
 Returns:
     {
@@ -78,6 +84,7 @@ Returns:
     }
 ```
 
-### Download File GET /files/<file> ###
-Example: GET /files/Google-Chrome-1.0.0.exe
+### Download File ###
 Download a version that has been uploaded with the Upload File for Version route.
+`GET /files/<file>` 
+Example: `GET /files/Google-Chrome-1.0.0.exe`
